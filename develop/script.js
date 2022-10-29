@@ -13,6 +13,8 @@ var includeLower=false, //char types selected by user
     includeNum=false, 
     includeSpecial=false;
 
+var passwordFlag = [0,0,0,0]; //identify if all selected char types are included in password
+
 var getNextChar = [ //randomly generates a character 
   function lowerCase(){ //returns lowerCase char if selected by user and if index 0 is selected by function call. 
     if (includeLower) return charList.lower[Math.floor(Math.random()*charList.lower.length)]; 
@@ -31,6 +33,25 @@ var getNextChar = [ //randomly generates a character
     else return "";
   }
 ]
+
+function setFlag (checkChar){ //changes values of passwordFlag
+  if (!includeLower) passwordFlag[0] = 1; //if char type not selected by user set to 1
+  else if (charList.lower.includes(checkChar)) passwordFlag[0] = 1; //if selected and found in password set to 1
+  
+  if (!includeUpper) passwordFlag[1] = 1;
+  else if (charList.upper.includes(checkChar)) passwordFlag[1] = 1;
+
+  if (!includeNum) passwordFlag[2] = 1;
+  else if (charList.number.includes(checkChar)) passwordFlag[2] = 1;
+
+  if (!includeSpecial) passwordFlag[3] = 1;
+  else if (charList.special.includes(checkChar)) passwordFlag[3] = 1;
+}
+
+function validCode(){ //password is valid if all char types selected by user appear in password  
+  var isInclude =(element) => element == 1; //password is valid all values in passwordFlag are set to 1
+  return passwordFlag.every(isInclude);
+}
 
 function generatePassword(){ //returns a password
   var password =""; //password being generated
@@ -54,12 +75,12 @@ function generatePassword(){ //returns a password
   }
   while(password.length<reqLength){ //keep adding new characters to password until required length is met
     nextChar = getNextChar[Math.floor(Math.random() * getNextChar.length)](); //randomly chooses char type in getNextChar
-    password = password.concat(nextChar); //append nextChar to password    
+    password = password.concat(nextChar); //append nextChar to password   
+    setFlag(nextChar); //update passwordFlag
   }
-  return password;
+  if (validCode()) return password; //returns password if code is valid
+  else generatePassword();  //else call function again
 }
-
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
