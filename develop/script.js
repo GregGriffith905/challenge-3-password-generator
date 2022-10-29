@@ -82,17 +82,35 @@ function generatePassword(){ //returns a password
   else generatePassword();  //else call function again
 }
 
+function reset(){ //allows user to enter new password criteria
+  includeLower = false;
+  includeUpper = false;
+  includeNum = false;
+  includeSpecial = false;
+  reqLength = 0;
+  passwordFlag = [0,0,0,0];
+  document.querySelector("#password").value = "";
+}
+
+function copy() { //copy password to clipboard
+  var passwordText = document.querySelector("#password");
+  passwordText.select();
+  document.execCommand("copy");
+}
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
+var copyBtn = document.querySelector("#copy")
+var resetBtn = document.querySelector("#reset");
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+copyBtn.addEventListener("click", copy);
+resetBtn.addEventListener("click", reset);
