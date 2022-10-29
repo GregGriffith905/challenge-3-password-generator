@@ -82,10 +82,27 @@ header {
   display: inline-block;
   font-size: 22px;
   line-height: 22px;
-  margin: 16px 16px 16px 20px;
+  margin: 16px 16px 16px 180px;
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
+}
+
+.circle-button {
+  border:none;
+  background-color: black;
+  color: grey;
+  border-radius: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0px 20px 20px;
+  cursor: pointer;
+}
+
+#copy {
+  background-color: blue;
+  color: white ;
 }
 
 button[disabled] {
