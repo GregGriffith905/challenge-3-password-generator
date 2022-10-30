@@ -4,7 +4,7 @@
 Password Generator which will create passwords based on criteria set by user
 
 ##Links
-deployed: https://greggriffith905.github.io/challenge3/
+deployed: https://greggriffith905.github.io/challenge3/develop/
 github: https://github.com/GregGriffith905/challenge3
 
 
